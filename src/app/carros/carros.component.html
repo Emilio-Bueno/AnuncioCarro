@@ -1,1 +1,77 @@
-<p>carros works!</p>
+<div class="row">
+  <div class="col-8 m-auto">
+    <form [formGroup]="formGroupCarro">
+    <div class="mb-3">
+      <div class="display-6 text-center">
+        Cadastro de carros
+      </div>
+      <label for="titulo" class="form-label">Titulo:</label>
+      <input type="text" formControlName="titulo" class="form-control" id="titulo" placeholder="Digite seu nome">
+    </div>
+    <div class="mb-2">
+      <label for="descricao" class="form-label">Descrição:</label>
+      <input type="text" formControlName="descricao" class="form-control" id="descricao" placeholder="Digite sua idade">
+    </div>
+    <div class="mb-2">
+      <label for="preco" class="form-label">Preço:</label>
+      <input type="text" formControlName="preco" class="form-control" id="preco" placeholder="Digite seu email">
+    </div>
+    <div class="mb-2">
+      <label for="validade" class="form-label">Data da Validade:</label>
+      <input type="number" formControlName="validade" class="form-control" id="validade"
+        placeholder="Digite seu numero de celular">
+    </div>
+    <div class="mb-2">
+      <label for="img" class="form-label">Imagem:</label>
+      <input type="text" formControlName="img" class="form-control" id="img"
+        placeholder="Digite seu numero de celular">
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" formControlName="status" type="radio" name="status" id="flexRadioDefault1">
+      <label class="form-check-label" for="Ativo">
+        Ativo
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" formControlName="status" type="radio" name="status" id="flexRadioDefault2" checked>
+      <label class="form-check-label" for="Inativo">
+        Inativo
+      </label>
+    </div>
+    <div class="mb-3 d-flex justify-content-end">
+      <button class="btn btn-primary me-1" (click)="save()">Salvar</button>
+      <button class="btn btn-primary" (click)="clean()">Limpar</button>
+    </div>
+    </form>
+  </div>
+</div>
+<table class="table table-bordered border-dark">
+  <thead class="table-dark ">
+    <tr class="table-active">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Titulo</th>
+      <th scope="col">Descrição</th>
+      <th scope="col">Preço</th>
+      <th scope="col">Validade</th>
+      <th scope="col">Imagem</th>
+      <th scope="col">Status</th>
+      <th scope="col">Opções</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let carros of carros">
+      <th scope="row">{{carros.id}}</th>
+      <td>{{carros.titulo}}</td>
+      <td>{{carros.descricao}}</td>
+      <td>{{carros.preco}}</td>
+      <td>{{carros.validade}}</td>
+      <td>{{carros.img}}</td>
+      <td>{{carros.status}}</td>
+      <td>
+        <button class="btn btn-primary me-1" (click)="edit(carros)">Editar</button>
+        <button class="btn btn-primary" (click)="delete(carros)">Excluir</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
