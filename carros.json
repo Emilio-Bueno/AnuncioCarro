@@ -2,11 +2,12 @@
   "carros": [
     {
       "id": 1,
-      "titulo": "wr3wq3q3",
-      "descricao": "233tewtew",
-      "preco": "tewtewtw",
-      "img": "dfeewete",
-      "validade": 2231532532
+      "titulo": "aaaa",
+      "preco": 2121121,
+      "descricao": "aaaaaa",
+      "validade": "1211-12-12",
+      "img": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fautopapo.uol.com.br%2Fnoticia%2Favaliacao-ford-ka-se-1-0%2F&psig=AOvVaw0qZb2UJP5cWDnIGbq13XB7&ust=1686173363146000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCLjx7bDLr_8CFQAAAAAdAAAAABAE",
+      "status": "Inativo"
     }
   ]
 }

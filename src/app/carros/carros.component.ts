@@ -13,79 +13,88 @@ import { Carros} from '../carro'
   export class CarrosComponent implements OnInit {
     carros: Carros[] = [];
     isEditing : boolean = false;
-    formGroupCarro: FormGroup;
+    formGroupCarros: FormGroup;
     submitted: boolean = false;
 
-    constructor(private CarroService: CarrosService, private formBuilder: FormBuilder) {
-      this.formGroupCarro = formBuilder.group({
-        id: [''],
-        titulo: ['',[Validators.required]],
-        descricao: ['',[Validators.required]],
-        preco : ['',[Validators.required]],
-        img: [''],
-        validade: [''],
-        status: [''],
-      });
-    }
-
-    clean(){
-      this.formGroupCarro.reset();
-      this.isEditing = false;
-      this.submitted = false;
-    }
-
-    save() {
-      this.submitted = true;
-      if (this.formGroupCarro.valid){
-        if (this.isEditing){
-          this.CarroService.update(this.formGroupCarro.value).subscribe({
-            next: () => {
-              this.loadCarros();
-              this.formGroupCarro.reset();
-              this.isEditing = false;
-              this.submitted = false;
-            }
-          });
-
-        }
-        else {
-          this.CarroService.save(this.formGroupCarro.value).subscribe({
-            next: data => {
-              this.carros.push(data);
-              this.formGroupCarro.reset();
-              this.submitted = false;
-            }
-          })
-        }
-      }
-      }
-    ngOnInit(): void {
-      this.loadCarros();
-    }
-
-    loadCarros() {
-      this.CarroService.getCarros().subscribe({
-        next: data => this.carros = data
-      });
-    }
-
-    edit(Carro: Carros) {
-      this.formGroupCarro.setValue(Carro);
-      this.isEditing = true;
-    }
-
-    delete(Carro: Carros) {
-      this.CarroService.delete(Carro).subscribe({
-        next: () => this.loadCarros()
-      });
-    }
-    get name() : any {
-      return this.formGroupCarro.get("name");
-    }
-    get email() : any {
-      return this.formGroupCarro.get("email");
-    }
-
-
+     constructor(private carrosService: CarrosService, private formBuilder: FormBuilder) {
+    this.formGroupCarros = this.formBuilder.group({
+      id: [''],
+      titulo: ['', [Validators.required]],
+      preco: ['', [Validators.required]],
+      descricao: ['', [Validators.required]],
+      validade: ['', [Validators.required]],
+      img: ['', [Validators.required]],
+      status: [false]
+    });
   }
 
+  ngOnInit(): void {
+    this.loadCarros();
+  }
+
+  loadCarros() {
+    this.carrosService.getCarros().subscribe({
+      next: data => this.carros = data
+    });
+  }
+
+  save() {
+    this.submitted = true;
+
+    if (this.formGroupCarros.valid) {
+      if (this.isEditing) {
+        this.carrosService.update(this.formGroupCarros.value).subscribe({
+          next: () => {
+            this.loadCarros()
+            this.formGroupCarros.reset();
+            this.isEditing = false;
+            this.submitted = false;
+          }
+        })
+      }
+  
+      else {
+        this.carrosService.save(this.formGroupCarros.value).subscribe({
+          next: data => {
+            this.carros.push(data);
+            this.formGroupCarros.reset();
+            this.submitted = false;
+          }
+        })
+      }
+    }
+  }
+
+  edit(carros: Carros) {
+    this.formGroupCarros.setValue(carros);
+    this.isEditing = true;
+  }
+
+  delete(carros: Carros) {
+    this.carrosService.delete(carros).subscribe({
+      next: () => this.loadCarros()
+    });
+  }
+
+  clean() {
+    this.formGroupCarros.reset();
+    this.submitted = false;
+  }
+
+  get title(): any {
+    return this.formGroupCarros.get("titulo");
+  }
+  get price(): any {
+    return this.formGroupCarros.get("preco");
+  }
+  get description(): any {
+    return this.formGroupCarros.get("descricao");
+  }
+  get data(): any {
+    return this.formGroupCarros.get("validade");
+  }
+  get img(): any {
+    return this.formGroupCarros.get("img");
+  }
+
+}
