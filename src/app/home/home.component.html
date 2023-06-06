@@ -6,12 +6,12 @@
           <div class="card m-auto" style="width: 18rem; height: 34rem;">
             <img src="{{carros.img}}" class="card-img-top" alt="{{carros.titulo}}" style="height: 190px;">
             <div class="card-body">
-              <h5 class="card-title">{{carros.titulo}}</h5>
-              <h6>{{carros.preco | currency:'BRL':'symbol':'1.2-2'}}</h6>
-              <p class="card-text mb-3">{{carros.descricao}}</p>
+              <h3 class="card-title">{{carros.titulo}}</h3>
+              <h3 class="mt-5">{{carros.preco | currency:'BRL':'symbol':'1.2-2'}}</h3>
+              <h3 class="card-text mb-3 mt-5">{{carros.descricao}}</h3>
             </div>
             <div style="position: absolute; bottom: 0;left: 12px;">
-              <small style="font-style: italic;">Expira em {{carros.validade | date:'dd/MM/yyyy'}}</small>
+              <h5 style="font-style: italic;">Expira em {{carros.validade | date:'dd/MM/yyyy'}}</h5>
             </div>
           </div>
         </div>
